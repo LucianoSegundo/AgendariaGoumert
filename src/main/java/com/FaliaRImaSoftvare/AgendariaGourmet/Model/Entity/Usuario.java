@@ -4,83 +4,87 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
-    private long id;
-    private String usuario;
-    private String nome;
-    private String senha;
-    private String email;
-    private List<Contato> contatos;
+	private long id;
+	private String usuario;
+	private String nome;
+	private String senha;
+	private String email;
+	private List<Contato> contatos;
 
-    // Construtores, getters e setters
-    public Usuario(long id, String usuario, String nome, String senha, String email, List<Contato> contatos) {
-        this.id = id;
-        this.usuario = usuario;
-        this.nome = nome;
-        this.senha = senha;
-        this.email = email;
-        this.contatos = contatos;
-    }
-    
-    public Usuario(long id, String usuario, String nome, String senha, String email) {
-        this.id = id;
-        this.usuario = usuario;
-        this.nome = nome;
-        this.senha = senha;
-        this.email = email;
-        this.contatos = new ArrayList<Contato>();
-    }
+	public Usuario() {
+		this.contatos = new ArrayList<Contato>();
 
-    public boolean addContato(Contato contatos) {
-    	if(contatos == null) return false;
-    	this.contatos.add(contatos);
-    	
-    	return true;
-    }
-    public long getId() {
-        return id;
-    }
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public Usuario( String usuario, String nome, String senha, String email, List<Contato> contatos) {
+		this.usuario = usuario;
+		this.nome = nome;
+		this.senha = senha;
+		this.email = email;
+		this.contatos = contatos;
+	}
 
-    public String getUsuario() {
-        return usuario;
-    }
+	public Usuario( String usuario, String nome, String senha, String email) {
+		this.usuario = usuario;
+		this.nome = nome;
+		this.senha = senha;
+		this.email = email;
+		this.contatos = new ArrayList<Contato>();
+	}
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
+	public boolean addContato(Contato contatos) {
+		if (contatos == null)
+			return false;
+		this.contatos.add(contatos);
 
-    public String getNome() {
-        return nome;
-    }
+		return true;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public String getSenha() {
-        return senha;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+	public String getUsuario() {
+		return usuario;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public List<Contato> getContatos() {
-        return contatos;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setContatos(List<Contato> contatos) {
-        this.contatos = contatos;
-    }
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<Contato> getContatos() {
+		return contatos;
+	}
+
+	public void setContatos(List<Contato> contatos) {
+		this.contatos = contatos;
+	}
 }

@@ -1,5 +1,7 @@
 package com.FaliaRImaSoftvare.AgendariaGourmet.Model.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.FaliaRImaSoftvare.AgendariaGourmet.Model.Entity.Usuario;
@@ -8,26 +10,88 @@ public final class UsuarioRepository implements Repositorio<Usuario, Long> {
 
 	@Override
 	public void inserir(Usuario z) throws SQLException {
-		// TODO Auto-generated method stub
+
+		String query = "insert into usuario (usuario, nome, senha, email)"
+				+"values(?,?,?,?);";
+		
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(query);
+
+		pstm.setString(1, z.getUsuario());
+		pstm.setString(2, z.getNome());
+		pstm.setString(3, z.getSenha());
+		pstm.setString(4, z.getEmail());
+		
+		pstm.execute();
+		
 		
 	}
 
 	@Override
 	public void alterar(Usuario z) throws SQLException {
-		// TODO Auto-generated method stub
+		
+		String sql = "update usuario set nome=?, senha=?, email=?"
+				+ "where codigo = "+ z.getId()+";";
+		
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+		
+		pstm.setString(1, z.getNome());
+		pstm.setString(2, z.getSenha());
+		pstm.setString(3, z.getEmail());
+		
+		pstm.execute();
 		
 	}
 
 	@Override
 	public Usuario ler(Long k) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "select * from usuario where idusuario ="+ k+";";
+		
+		ResultSet resultado = ConnectionManager.getCurrentConnection().prepareStatement(query).executeQuery();
+		
+		Usuario resposta = null;
+		
+		resposta = montarUsuario(resultado);
+		
+		
+		return resposta;
+	}
+	
+	public Usuario consultar(String usuario) throws SQLException {
+		
+		String query = "select * from usuario where usuario ="+ usuario+";";
+		
+		ResultSet resultado = ConnectionManager.getCurrentConnection().prepareStatement(query).executeQuery();
+		
+		Usuario resposta = null;
+		
+		resposta = montarUsuario(resultado);
+		
+		
+		return resposta;
 	}
 
 	@Override
 	public void delete(Long k) throws SQLException {
-		// TODO Auto-generated method stub
+		
+		String sql = "delete from usuario where idusuario = "+ k+";";
+		
+		ConnectionManager.getCurrentConnection().prepareStatement(sql).execute();
 		
 	}
 
+	private  Usuario montarUsuario(ResultSet resultado) throws SQLException {
+		Usuario resposta = new Usuario();
+
+		if(resultado.next()) {
+			
+			resposta.setId(resultado.getLong("idusuario"));
+			resposta.setUsuario(resultado.getString("usuario"));
+			resposta.setNome(resultado.getString("nome"));
+			resposta.setSenha(resultado.getString("senha"));
+			resposta.setEmail(resultado.getString("email"));
+
+
+		}
+		return resposta;
+	}
 }
