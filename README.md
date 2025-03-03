@@ -26,6 +26,7 @@ classDiagram
         String senha
         String email
         List~Contato~ contatos
+         +addContato(): boolean
     }
 
     class Contato {
@@ -33,6 +34,8 @@ classDiagram
         String nomeContato
         List~Email~ emails
         List~NumeroTelefone~ telefones
+        +addEmail(): boolean
+        +addTelefone(): boolean
     }
 
     class Email {
