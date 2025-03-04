@@ -52,7 +52,7 @@ public class ConnectionManager {
 		
 		String query= "CREATE TABLE Usuario (\n"
 				+ "    idusuario INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-				+ "    usuario TEXT NOT NULL,\n"
+				+ "    usuario TEXT NOT NULL UNIQUE,\n"
 				+ "    nome TEXT NOT NULL,\n"
 				+ "    senha TEXT NOT NULL,\n"
 				+ "    email TEXT NOT NULL\n"

@@ -3,10 +3,13 @@ package com.FaliaRImaSoftvare.AgendariaGourmet.Model.Entity;
 public class Email {
     private long id;
     private String email;
+    private long contato;
 
-    public Email(long id, String email) {
+    public Email() {};
+    public Email(long id, String email, long contato) {
         this.id = id;
         this.email = email;
+        this.setContato(contato);
     }
 
     public long getId() {
@@ -28,7 +31,15 @@ public class Email {
     	return true;
     }
 
-    public boolean validarEmail(String email) {
+    public long getContato() {
+		return contato;
+	}
+
+	public void setContato(long contato) {
+		this.contato = contato;
+	}
+
+	public boolean validarEmail(String email) {
     	
         return false;
     }

@@ -8,7 +8,9 @@ public class Contato {
     private String nomeContato;
     private List<Email> emails;
     private List<NumeroTelefone> telefones;
-
+    private long usuarioId;
+    
+    public Contato() {};
     public Contato(long id, String nomeContato, List<Email> emails, List<NumeroTelefone> telefones) {
         this.id = id;
         this.nomeContato = nomeContato;
@@ -16,8 +18,8 @@ public class Contato {
         this.telefones = telefones;
     }
     
-    public Contato(long id, String nomeContato) {
-        this.id = id;
+    public Contato(long usuarioId, String nomeContato) {
+        this.usuarioId = usuarioId;
         this.nomeContato = nomeContato;
         this.emails = new ArrayList<Email>();
         this.telefones = new  ArrayList<NumeroTelefone>();
@@ -69,5 +71,11 @@ public class Contato {
     public void setTelefones(List<NumeroTelefone> telefones) {
         this.telefones = telefones;
     }
+	public long getUsuarioId() {
+		return usuarioId;
+	}
+	public void setUsuarioId(long usuarioId) {
+		this.usuarioId = usuarioId;
+	}
 }
 

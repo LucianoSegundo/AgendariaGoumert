@@ -8,6 +8,7 @@ import com.FaliaRImaSoftvare.AgendariaGourmet.Model.Entity.Usuario;
 
 public final class UsuarioRepository implements Repositorio<Usuario, Long> {
 
+	private ContatoRepository contatoRepo = new ContatoRepository();
 	@Override
 	public void inserir(Usuario z) throws SQLException {
 
@@ -30,7 +31,7 @@ public final class UsuarioRepository implements Repositorio<Usuario, Long> {
 	public void alterar(Usuario z) throws SQLException {
 		
 		String sql = "update usuario set nome=?, senha=?, email=?"
-				+ "where codigo = "+ z.getId()+";";
+				+ "where idusuario = "+ z.getId()+";";
 		
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 		
@@ -50,21 +51,24 @@ public final class UsuarioRepository implements Repositorio<Usuario, Long> {
 		
 		Usuario resposta = null;
 		
+		if(resultado.next()) {
 		resposta = montarUsuario(resultado);
-		
+		}
 		
 		return resposta;
 	}
 	
 	public Usuario consultar(String usuario) throws SQLException {
 		
-		String query = "select * from usuario where usuario ="+ usuario+";";
+		String query = "select * from usuario where usuario = '"+ usuario+"';";
 		
 		ResultSet resultado = ConnectionManager.getCurrentConnection().prepareStatement(query).executeQuery();
 		
 		Usuario resposta = null;
 		
-		resposta = montarUsuario(resultado);
+		if(resultado.next()) {
+			resposta = montarUsuario(resultado);
+			}
 		
 		
 		return resposta;
@@ -81,17 +85,15 @@ public final class UsuarioRepository implements Repositorio<Usuario, Long> {
 
 	private  Usuario montarUsuario(ResultSet resultado) throws SQLException {
 		Usuario resposta = new Usuario();
-
-		if(resultado.next()) {
 			
 			resposta.setId(resultado.getLong("idusuario"));
 			resposta.setUsuario(resultado.getString("usuario"));
 			resposta.setNome(resultado.getString("nome"));
 			resposta.setSenha(resultado.getString("senha"));
 			resposta.setEmail(resultado.getString("email"));
-
-
-		}
+			
+			resposta.setContatos(null);
+		
 		return resposta;
 	}
 }

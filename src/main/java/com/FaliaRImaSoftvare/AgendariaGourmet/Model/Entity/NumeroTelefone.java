@@ -4,11 +4,22 @@ public class NumeroTelefone {
     private long id;
     private String numeroDDD;
     private String numeroTelefone;
+    private long contato;
 
-    public NumeroTelefone(long id, String numeroDDD, String numeroTelefone) {
+    public NumeroTelefone() {};
+    
+    public NumeroTelefone(String numeroDDD, String numeroTelefone, long contato) {
+    	 this.numeroDDD = numeroDDD;
+         this.numeroTelefone = numeroTelefone;
+         this.setContato(contato);
+    };
+
+    
+    public NumeroTelefone(long id, String numeroDDD, String numeroTelefone, long contato) {
         this.id = id;
         this.numeroDDD = numeroDDD;
         this.numeroTelefone = numeroTelefone;
+        this.setContato(contato);
     }
 
     public long getId() {
@@ -41,7 +52,13 @@ public class NumeroTelefone {
         return true;
     }
 
-    public boolean validarNumeroTelefone(String numeroTelefone) {
+    public long getContato() {
+		return contato;
+	}
+	public void setContato(long contato) {
+		this.contato = contato;
+	}
+	public boolean validarNumeroTelefone(String numeroTelefone) {
 
     	return numeroTelefone != null && numeroTelefone.matches("\\d{10,11}");
     }
