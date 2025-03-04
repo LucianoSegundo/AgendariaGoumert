@@ -92,4 +92,10 @@ public class EmailRepository implements Repositorio<Email, Long> {
 		return email;
 	}
 
+	@Override
+	public Email ler(String k) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

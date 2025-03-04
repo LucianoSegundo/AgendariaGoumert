@@ -94,6 +94,12 @@ public class TelefoneRepository implements Repositorio<NumeroTelefone, Long> {
 
 		return telefone;
 	}
+
+	@Override
+	public NumeroTelefone ler(String k) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

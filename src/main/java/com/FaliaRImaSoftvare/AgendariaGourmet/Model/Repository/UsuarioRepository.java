@@ -3,6 +3,7 @@ package com.FaliaRImaSoftvare.AgendariaGourmet.Model.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.FaliaRImaSoftvare.AgendariaGourmet.Model.Entity.Usuario;
 
@@ -58,7 +59,7 @@ public final class UsuarioRepository implements Repositorio<Usuario, Long> {
 		return resposta;
 	}
 	
-	public Usuario consultar(String usuario) throws SQLException {
+	public Usuario ler(String usuario) throws SQLException {
 		
 		String query = "select * from usuario where usuario = '"+ usuario+"';";
 		
@@ -95,5 +96,12 @@ public final class UsuarioRepository implements Repositorio<Usuario, Long> {
 			resposta.setContatos(null);
 		
 		return resposta;
+	}
+
+
+	@Override
+	public List<Usuario> listar(Long k) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
