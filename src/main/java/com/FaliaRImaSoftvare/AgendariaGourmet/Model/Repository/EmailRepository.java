@@ -73,7 +73,7 @@ public class EmailRepository implements Repositorio<Email, Long> {
 
 	@Override
 	public void delete(Long idEmail) throws SQLException {
-		
+
 		String sql = "delete from email where idemail = " + idEmail + ";";
 
 		ConnectionManager.getCurrentConnection().prepareStatement(sql).execute();
@@ -86,7 +86,6 @@ public class EmailRepository implements Repositorio<Email, Long> {
 		email.setId(resultado.getLong("idemail"));
 		email.setEmail(resultado.getString("email"));
 		email.setContato(resultado.getLong("idcontato"));
-		
 
 		return email;
 	}

@@ -3,38 +3,42 @@ package com.FaliaRImaSoftvare.AgendariaGourmet.Model.Entity;
 import com.FaliaRImaSoftvare.AgendariaGourmet.Model.Exception.CamposInvalidosException;
 
 public class Email {
-    private long id;
-    private String email;
-    private long contato;
+	private long id;
+	private String email;
+	private long contato;
 
-    public Email() {};
-    public Email(long id, String email, long contato) {
-        this.id = id;
-        this.email = email;
-        this.setContato(contato);
-    }
+	public Email() {
+	};
 
-    public long getId() {
-        return id;
-    }
+	public Email(long id, String email, long contato) {
+		this.id = id;
+		this.email = email;
+		this.setContato(contato);
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public boolean setEmail(String email) {
-    	if(email == null || email.isBlank()) throw new CamposInvalidosException("email não pode ser inserido por estar branco ou nulo");
-    	if(validarEmail(email) == false) throw new CamposInvalidosException("email não segue a formatação correta");
-    	this.email = email;
-    	
-    	return true;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public long getContato() {
+	public boolean setEmail(String email) {
+		if (email == null || email.isBlank())
+			throw new CamposInvalidosException("email não pode ser inserido por estar branco ou nulo");
+		if (validarEmail(email) == false)
+			throw new CamposInvalidosException("email não segue a formatação correta");
+		this.email = email;
+
+		return true;
+	}
+
+	public long getContato() {
 		return contato;
 	}
 
@@ -43,8 +47,7 @@ public class Email {
 	}
 
 	public boolean validarEmail(String email) {
-    	
-        return true;
-    }
-}
 
+		return true;
+	}
+}

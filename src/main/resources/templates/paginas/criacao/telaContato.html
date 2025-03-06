@@ -21,10 +21,10 @@
 
 			<tr style="padding: 0px 10px; display: flex; justify-content: space-between;">
 				<a href="#" class="btn btn-success"
-					th:href="@{/{usuario}/{contato}/email/criar(usuario=${usuario}, contato=${contato})}"
+					th:href="@{/{contato}/email/criar(contato=${contato})}"
 					style="width: 49%; padding: 10px 8px; margin-right: 26px;">Adicionar Novo Email</a></td>
 				<a href="#" class="btn btn-success"
-					th:href="@{/{usuario}/{contato}/telefone/criar(usuario=${usuario}, contato=${contato})}"
+					th:href="@{/{contato}/telefone/criar(contato=${contato})}"
 					style="width: 49%; padding: 10px 8px;">Adicionar Novo Telefone</a></td>
 			</tr>
 		</table>
@@ -46,7 +46,7 @@
 						<a th:text="${email.email}"></a>
 
 					<td><a href="#" class="btn btn-warning"
-							th:href="@{/{usuario}/{contato}/email/deletar/{id}(usuario=${usuario}, contato=${contato}, id=${email.id})}">deletar</a>
+							th:href="@{/{contato}/email/deletar/{id}( contato=${contato}, id=${email.id})}">deletar</a>
 					</td>
 
 				</tr>
@@ -72,7 +72,7 @@
 						<a th:text="${telefone.numeroTelefone}"></a>
 					</td>
 					<td><a href="#" class="btn btn-warning"
-							th:href="@{/{usuario}/{contato}/telefone/deletar/{id}(usuario=${usuario}, contato=${contato}, id=${telefone.id})}">deletar</a>
+							th:href="@{/{contato}/telefone/deletar/{id}(contato=${contato}, id=${telefone.id})}">deletar</a>
 					</td>
 
 				</tr>

@@ -57,9 +57,12 @@ public class ContatoRepository implements Repositorio<Contato, Long> {
 	}
 
 	public Contato ler(String nomeContato) throws SQLException {
-		String query = "select * from Contato where nomecontato = '" + nomeContato + "';";
+		String query = "select * from Contato where nomecontato = ?;";
 
-		ResultSet resultado = ConnectionManager.getCurrentConnection().prepareStatement(query).executeQuery();
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(query);
+		pstm.setString(1, nomeContato);
+
+		ResultSet resultado = pstm.executeQuery();
 
 		Contato contato = new Contato();
 		if (resultado.next()) {
@@ -72,9 +75,13 @@ public class ContatoRepository implements Repositorio<Contato, Long> {
 
 	public List<Contato> listar(Long idusuario) throws SQLException {
 
-		String query = "select * from Contato where idusuario = " + idusuario + ";";
+		String query = "select * from Contato where idusuario = ?;";
 
-		ResultSet resultado = ConnectionManager.getCurrentConnection().prepareStatement(query).executeQuery();
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(query);
+
+		pstm.setLong(1, idusuario);
+
+		ResultSet resultado = pstm.executeQuery();
 
 		Contato contato = new Contato();
 		List<Contato> listaContato = new ArrayList<Contato>();
@@ -92,7 +99,7 @@ public class ContatoRepository implements Repositorio<Contato, Long> {
 	@Override
 	public void delete(Long idcontato) throws SQLException {
 
-		String sql = "delete from Contato where idcontato = " + idcontato + ";";
+		String query = "delete from Contato where idcontato = ?;";
 
 		List<NumeroTelefone> telefones = telefoneRepo.listar(idcontato);
 
@@ -109,8 +116,10 @@ public class ContatoRepository implements Repositorio<Contato, Long> {
 
 		}
 		;
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(query);
 
-		ConnectionManager.getCurrentConnection().prepareStatement(sql).execute();
+		pstm.setLong(1, idcontato);
+		pstm.execute();
 
 	}
 
@@ -129,6 +138,33 @@ public class ContatoRepository implements Repositorio<Contato, Long> {
 		contato.setEmails(emails);
 
 		return contato;
+	}
+
+	public List<Contato> filtrar(Long userId, String filtro) throws SQLException {
+
+		String query = "select * from Contato where idusuario = ?" + "AND nomeContato LIKE ? "
+				+ "AND nomeContato NOT LIKE ? " + "AND nomeContato NOT LIKE ?";
+
+		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(query);
+
+		pstm.setLong(1, userId);
+		pstm.setString(2, "%" + filtro + "%");
+		pstm.setString(3, "% " + filtro + "%");
+		pstm.setString(4, "% " + filtro + "");
+
+		ResultSet resultado = pstm.executeQuery();
+
+		Contato contato = new Contato();
+		List<Contato> listaContato = new ArrayList<Contato>();
+
+		while (resultado.next()) {
+
+			contato = montarContato(resultado);
+
+			listaContato.add(contato);
+		}
+
+		return listaContato;
 	}
 
 }

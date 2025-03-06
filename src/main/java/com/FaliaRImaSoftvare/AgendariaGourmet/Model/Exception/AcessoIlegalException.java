@@ -1,4 +1,4 @@
-package com.FaliaRImaSoftvare.AgendariaGourmet.Model.Service;
+package com.FaliaRImaSoftvare.AgendariaGourmet.Model.Exception;
 
 public class AcessoIlegalException extends Exception {
 

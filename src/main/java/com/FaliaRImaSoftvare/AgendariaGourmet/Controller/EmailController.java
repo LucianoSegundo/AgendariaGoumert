@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.FaliaRImaSoftvare.AgendariaGourmet.Controller.Dto.TelefoneDTO;
 import com.FaliaRImaSoftvare.AgendariaGourmet.Model.Service.EmailService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
-@RequestMapping("{idUsuario}/{idContato}/email")
+@RequestMapping("/{idContato}/email")
 public class EmailController {
 
 	@Autowired
@@ -24,42 +26,46 @@ public class EmailController {
 	private String msg = null;
 
 	@GetMapping("/criar")
-	public String paginaCriar(@PathVariable Long idUsuario, @PathVariable Long idContato, Model m) {
+	public String paginaCriar(@PathVariable Long idContato, Model m, HttpSession session) {
 
-		m.addAttribute("usuario", idUsuario);
+		Long id = (Long) session.getAttribute("usuario");
+
+		if (id == null)
+			return "redirect:/usuario/login";
+
 		m.addAttribute("contato", idContato);
-		m.addAttribute("url", "/" + idUsuario + "/contato/consultar/" + idContato);
+		m.addAttribute("url", "/contato/consultar/" + idContato);
 		m.addAttribute("msg", msg);
 
 		return "paginas/criacao/TelaCadastroEmail";
 	}
 
 	@PostMapping("/criar")
-	public String Criar(@PathVariable Long idUsuario, @PathVariable Long idContato, Model m, String email) {
+	public String Criar(@PathVariable Long idContato, Model m, String email) {
 
 		try {
 			service.criar(idContato, email);
 
-			return "redirect:/" + idUsuario + "/contato/consultar/" + idContato;
+			return "redirect:/contato/consultar/" + idContato;
 
 		} catch (Exception e) {
 			msg = e.getMessage();
-			return "redirect:/" + idUsuario + "/" + idContato + "/email/criar";
+			return "redirect:/" + idContato + "/email/criar";
 
 		}
 	}
-	
+
 	@GetMapping("/deletar/{id}")
-	public String deletar(@PathVariable Long idUsuario, @PathVariable Long idContato, @PathVariable Long id, Model m, TelefoneDTO telefone) {
+	public String deletar(@PathVariable Long idContato, @PathVariable Long id, Model m, TelefoneDTO telefone) {
 
 		try {
 			service.excluir(id);
 
-			return "redirect:/" + idUsuario + "/contato/consultar/" + idContato;
+			return "redirect:/contato/consultar/" + idContato;
 
 		} catch (Exception e) {
 			msg = e.getMessage();
-			return "redirect:/" + idUsuario + "/contato/consultar/" + idContato;
+			return "redirect:/contato/consultar/" + idContato;
 
 		}
 	}

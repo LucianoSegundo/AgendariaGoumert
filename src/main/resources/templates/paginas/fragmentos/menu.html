@@ -10,22 +10,23 @@
 
 		<header
 			style="width: 100%; background-color: #28a745; height: 10%; padding-left: 1%; padding-right: 1%; display: flex; justify-content: space-between;">
-			<div th:if="${usuario}!=null"  style="display: flex; justify-content: start;">
+			<div th:if="${#ctx.session.usuario}!=null" style="display: flex; justify-content: start;">
 				<div>
-					<a href="#" class="btn btn-success"
-						th:href="@{/contato/criar/{userId}(userId=${usuario})}">deslogar</a>
+					<a href="#" class="btn btn-success" th:href="@{/usuario/deslogar}">deslogar</a>
 					</td>
 				</div>
 				<div th:if="${url} != null">
 					<a href="#" class="btn btn-success" th:href="@{{url}(url=${url})}">Voltar</a></td>
-				</div>	
+				</div>
+
 			</div>
-			<div th:if="${usuario}==null">
+
+			<div th:if="${#ctx.session.usuario}==null">
 				<a class="btn btn-success" style="color: #28a745;"> gambiarra, você não viu nada</a>
-				</td>
 			</div>
-			<div th:if="${usuario}!=null">
-				<a href="#" class="btn btn-success" th:href="@{/contato/criar/{userId}(userId=${usuario})}">Perfil</a>
+
+			<div th:if="${#ctx.session.usuario}!=null">
+				<a href="#" class="btn btn-success" th:href="@{/usuario/perfil}" th:text="${#ctx.session.usuarioNome}"></a>
 				</td>
 			</div>
 		</header>

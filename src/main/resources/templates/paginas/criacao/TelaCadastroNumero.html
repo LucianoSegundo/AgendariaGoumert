@@ -18,7 +18,7 @@
 			<div class="col-md-6">
 				<div class="card p-4 shadow-sm">
 					<h2 class="text-center mb-4">Adicionar NOvo Número de Telefone</h2>
-					<form th:action="@{/{usuario}/{id}/telefone/criar(usuario=${usuario}, id=${contato})}" method="POST" id="formCadastro">
+					<form th:action="@{/{id}/telefone/criar(id=${contato})}" method="POST" id="formCadastro">
 						<div class="form-group">
 							<label for="ddd">DDD:</label>
 							<input type="text" class="form-control" id="ddd" name="ddd" pattern="^\d{2}$" required

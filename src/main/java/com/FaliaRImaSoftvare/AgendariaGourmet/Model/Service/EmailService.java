@@ -11,35 +11,39 @@ import com.FaliaRImaSoftvare.AgendariaGourmet.Model.Repository.Fachada;
 public class EmailService {
 
 	Fachada fachada = Fachada.getCurrentInstance();
-	
-	public EmailService(){}
-	
+
+	public EmailService() {
+	}
+
 	public void criar(Long idContato, String enderecoEmail) {
-		if(idContato == null) throw new CamposInvalidosException("insersão não permitida, Id do contato invalido");
-		
+		if (idContato == null)
+			throw new CamposInvalidosException("insersão não permitida, Id do contato invalido");
+
 		Email email = new Email();
-		
-		if(email.setEmail(enderecoEmail) == true)
+
+		if (email.setEmail(enderecoEmail) == true)
 			email.setContato(idContato);
 		fachada.inserir(email);
-		
+
 	}
 
 	public void alterar(Long idEmail, String novoEmail) {
-		if(idEmail == null) throw new CamposInvalidosException("alteração não permitida, Id do email invalido");
-		
+		if (idEmail == null)
+			throw new CamposInvalidosException("alteração não permitida, Id do email invalido");
+
 		fachada.lerEmail(idEmail);
 		Email email = fachada.lerEmail(idEmail);
-		
-		if(email.setEmail(novoEmail) == true)
-		fachada.alterar(email);
-		
+
+		if (email.setEmail(novoEmail) == true)
+			fachada.alterar(email);
+
 	}
-	
+
 	public void excluir(Long idEmail) {
-		if(idEmail == null) throw new CamposInvalidosException("deleção não permitida, Id do email invalido");
-		
+		if (idEmail == null)
+			throw new CamposInvalidosException("deleção não permitida, Id do email invalido");
+
 		fachada.deletarEmail(idEmail);
-		
+
 	}
 }

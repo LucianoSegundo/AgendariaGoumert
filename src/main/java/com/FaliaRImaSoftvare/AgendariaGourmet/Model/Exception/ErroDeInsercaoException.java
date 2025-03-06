@@ -7,5 +7,5 @@ public class ErroDeInsercaoException extends RuntimeException {
 	public ErroDeInsercaoException(String mensagem) {
 		super(mensagem);
 	}
-	
+
 }
