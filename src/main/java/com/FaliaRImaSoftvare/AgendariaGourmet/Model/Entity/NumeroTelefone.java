@@ -1,69 +1,79 @@
 package com.FaliaRImaSoftvare.AgendariaGourmet.Model.Entity;
 
+import com.FaliaRImaSoftvare.AgendariaGourmet.Model.Exception.CamposInvalidosException;
+
 public class NumeroTelefone {
-    private long id;
-    private String numeroDDD;
-    private String numeroTelefone;
-    private long contato;
+	private long id;
+	private String numeroDDD;
+	private String numeroTelefone;
+	private long contato;
 
-    public NumeroTelefone() {};
-    
-    public NumeroTelefone(String numeroDDD, String numeroTelefone, long contato) {
-    	 this.numeroDDD = numeroDDD;
-         this.numeroTelefone = numeroTelefone;
-         this.setContato(contato);
-    };
+	public NumeroTelefone() {
+	};
 
-    
-    public NumeroTelefone(long id, String numeroDDD, String numeroTelefone, long contato) {
-        this.id = id;
-        this.numeroDDD = numeroDDD;
-        this.numeroTelefone = numeroTelefone;
-        this.setContato(contato);
-    }
+	public NumeroTelefone(String numeroDDD, String numeroTelefone, long contato) {
+		this.numeroDDD = numeroDDD;
+		this.numeroTelefone = numeroTelefone;
+		this.setContato(contato);
+	};
 
-    public long getId() {
-        return id;
-    }
+	public NumeroTelefone(long id, String numeroDDD, String numeroTelefone, long contato) {
+		this.id = id;
+		this.numeroDDD = numeroDDD;
+		this.numeroTelefone = numeroTelefone;
+		this.setContato(contato);
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public String getNumeroDDD() {
-        return numeroDDD;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public boolean setNumeroDDD(String numeroDDD) {
-    	if(validarNumeroDDD(numeroDDD)== false) return false;
-        this.numeroDDD = numeroDDD;
-        
-        return true;
-    }
+	public String getNumeroDDD() {
+		return numeroDDD;
+	}
 
-    public String getNumeroTelefone() {
-        return numeroTelefone;
-    }
+	public boolean setNumeroDDD(String numeroDDD) {
+		if (numeroDDD == null || numeroDDD.isBlank())
+			throw new CamposInvalidosException("não foi possivel inserir o numero do DDD, campo invalido");
+		if (validarNumeroDDD(numeroDDD) == false)
+			throw new CamposInvalidosException("DDD não segue o formanto: NN");
+		this.numeroDDD = numeroDDD;
 
-    public boolean setNumeroTelefone(String numeroTelefone) {
-    	if(validarNumeroTelefone(numeroTelefone) == false) return false;
-        this.numeroTelefone = numeroTelefone;
-        
-        return true;
-    }
+		return true;
+	}
 
-    public long getContato() {
+	public String getNumeroTelefone() {
+		return numeroTelefone;
+	}
+
+	public boolean setNumeroTelefone(String numeroTelefone) {
+		if (numeroDDD == null || numeroDDD.isBlank())
+			throw new CamposInvalidosException("não foi possivel inserir o numero do Telefone, campo invalido");
+		if (validarNumeroTelefone(numeroTelefone) == false)
+			throw new CamposInvalidosException("Telefone não segue o formato 9NNNN-NNNN");
+		this.numeroTelefone = numeroTelefone;
+
+		return true;
+	}
+
+	public long getContato() {
 		return contato;
 	}
+
 	public void setContato(long contato) {
 		this.contato = contato;
 	}
+
 	public boolean validarNumeroTelefone(String numeroTelefone) {
 
-    	return numeroTelefone != null && numeroTelefone.matches("\\d{10,11}");
-    }
+		return true;
+	}
 
-    public boolean validarNumeroDDD(String numeroDDD) {
-        return numeroDDD != null && numeroDDD.matches("\\d{2}");
-    }
+	public boolean validarNumeroDDD(String numeroDDD) {
+		return true;
+	}
 }

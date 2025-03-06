@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<div th:fragment="menu">
+
+		<header
+			style="width: 100%; background-color: #28a745; height: 10%; padding-left: 1%; padding-right: 1%; display: flex; justify-content: space-between;">
+			<div th:if="${usuario}!=null"  style="display: flex; justify-content: start;">
+				<div>
+					<a href="#" class="btn btn-success"
+						th:href="@{/contato/criar/{userId}(userId=${usuario})}">deslogar</a>
+					</td>
+				</div>
+				<div th:if="${url} != null">
+					<a href="#" class="btn btn-success" th:href="@{{url}(url=${url})}">Voltar</a></td>
+				</div>	
+			</div>
+			<div th:if="${usuario}==null">
+				<a class="btn btn-success" style="color: #28a745;"> gambiarra, você não viu nada</a>
+				</td>
+			</div>
+			<div th:if="${usuario}!=null">
+				<a href="#" class="btn btn-success" th:href="@{/contato/criar/{userId}(userId=${usuario})}">Perfil</a>
+				</td>
+			</div>
+		</header>
+
+		<div class="alert alert-info" th:if="${msg}!=null">
+			<small th:text="${msg}"></small>
+		</div>
+	</div>
+
+</body>
+
+</html>

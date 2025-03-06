@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Agendaria Gourmet</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body></body>
+
+<div th:replace="~{paginas/fragmentos/menu :: menu}"></div>
+
+<div style="padding: 10px 10px;">
+	<table class="table table-striped">
+
+		<tr>
+			<form>
+
+				<div class="form-group">
+					<input type="text" class="form-control" id="nome" name="nome" required
+						placeholder="filtrar pelo nome">
+				</div>
+
+				<button type="submit" class="btn btn-success btn-block">filtrar</button>
+
+			</form>
+		</tr>
+		<tr>
+			<a href="#" class="btn btn-success" th:href="@{/{userId}/contato/criar(userId=${usuario})}"
+				style="width: 100%; margin-top: 14px;">Adicionar Novo Contato</a></td>
+
+		</tr>
+	</table>
+</div>
+
+<div style="padding: 10px 10px;">
+	<table class="table table-striped">
+
+		<tr class="table-primary">
+			<th style="width: 68%;">Nome</th>
+			<th style="width: 7%;">deletar</thstyle="width: 70%;">
+			<th style="width: 12%;">adicionar Email</th>
+			<th style="width: 13%;">adicionar Telefone</th>
+		</tr>
+
+		<tr th:each="contato : ${contatos}">
+			<td>
+				<a th:text="${contato.nomeContato}" th:href="@{/{usuario}/contato/consultar/{id}(usuario=${usuario}, id=${contato.id})}"></a>
+			</td>
+			<td><a href="#" class="btn btn-warning" th:href="@{/{usuario}/contato/deletar/{id}(usuario=${usuario}, id=${contato.id})}">deletar</a>
+			<td><a href="#" class="btn btn-success" th:href="@{/{usuario}/{id}/email/criar(usuario=${usuario}, id=${contato.id})}">ADD Email</a>
+			<td><a href="#" class="btn btn-success" th:href="@{/{usuario}/{id}/telefone/criar(usuario=${usuario}, id=${contato.id})}">ADD
+					Telefone</a>
+
+		</tr>
+
+	</table>
+</div>
+
+</body>
+
+</html>

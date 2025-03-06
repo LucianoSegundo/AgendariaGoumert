@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Formulário de Cadastro</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div th:replace="~{paginas/fragmentos/menu :: menu}"></div>
+
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card p-4 shadow-sm">
+					<h2 class="text-center mb-3">Adicionar Novo Contato</h2>
+					<form th:action="@{/{userId}/contato/criar(userId=${usuario})}" method="POST" id="formCadastro">
+
+						<div class="form-group">
+							<label for="nomeContato">Nome:</label>
+							<input type="text" class="form-control" id="nomeContato" name="nomeContato" required
+								placeholder="nome do contato">
+						</div>
+
+						<fieldset>
+							<legend>Telefone</legend>
+
+							<div class="form-group">
+								<label for="DDD">Nome:</label>
+								<input type="text" class="form-control" id="DDD" name="DDD" required
+									placeholder="numero do DDD">
+							</div>
+							<div class="form-group">
+								<label for="telefone">Nome:</label>
+								<input type="text" class="form-control" id="telefone" name="telefone" required
+									placeholder="98765-4321">
+							</div>
+						</fieldset>
+
+						<fieldset>
+							<legend> Email</legend>
+							<div class="form-group">
+								<label for="Email">Nome:</label>
+								<input type="text" class="form-control" id="Email" name="Email" required
+									placeholder=" email@gmail.com">
+							</div>
+						</fieldset>
+
+						<button type="submit" class="btn btn-success btn-block">Criar</button>
+
+						<p> <a href="/usuario/login">Clique Aqui</a> para fazer login,caso já tenha conta. </p>
+					</form>
+				</div>
+			</div>

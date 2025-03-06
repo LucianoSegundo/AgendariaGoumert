@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.FaliaRImaSoftvare.AgendariaGourmet.Model.Entity.Contato;
 import com.FaliaRImaSoftvare.AgendariaGourmet.Model.Entity.Usuario;
 
 public final class UsuarioRepository implements Repositorio<Usuario, Long> {
@@ -93,7 +94,8 @@ public final class UsuarioRepository implements Repositorio<Usuario, Long> {
 			resposta.setSenha(resultado.getString("senha"));
 			resposta.setEmail(resultado.getString("email"));
 			
-			resposta.setContatos(null);
+			List<Contato> contatos = contatoRepo.listar(resposta.getId());
+			resposta.setContatos(contatos);
 		
 		return resposta;
 	}

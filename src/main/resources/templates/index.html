@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Agendaria Gourmet</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div th:replace="~{paginas/fragmentos/menu :: menu}"></div>
+
+
+	<div class="container mt-5">
+
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card p-4 shadow-sm">
+					<h2 class="text-center mb-4">Agendaria Gourmet</h2>
+					<form action="/usuario/login" method="POST" id="formCadastro">
+
+						<div class="form-group">
+							<label for="Usuario">Usuario:</label>
+							<input type="text" class="form-control" id="usuario" name="usuario" required
+								placeholder="joão">
+						</div>
+
+						<div class="form-group">
+							<label for="senha">Senha:</label>
+							<input type="password" class="form-control" id="senha" name="senha" required>
+						</div>
+
+						<button type="submit" class="btn btn-success btn-block">Criar</button>
+
+						<p> Não possui uma conta ainda, meu?! então, meu! <a href="/usuario/cadastro"> Clique Aqui</a>,
+							para se cadastrar, meu! </p>
+					</form>
+				</div>
+			</div>

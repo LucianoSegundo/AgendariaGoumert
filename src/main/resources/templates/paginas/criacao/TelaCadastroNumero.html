@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Formulário de Cadastro</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div th:replace="~{paginas/fragmentos/menu :: menu}"></div>
+
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card p-4 shadow-sm">
+					<h2 class="text-center mb-4">Adicionar NOvo Número de Telefone</h2>
+					<form th:action="@{/{usuario}/{id}/telefone/criar(usuario=${usuario}, id=${contato})}" method="POST" id="formCadastro">
+						<div class="form-group">
+							<label for="ddd">DDD:</label>
+							<input type="text" class="form-control" id="ddd" name="ddd" pattern="^\d{2}$" required
+								placeholder="Ex: 11">
+						</div>
+
+						<div class="form-group">
+							<label for="telefone">Telefone:</label>
+							<input type="tel" class="form-control" id="telefone" name="telefone"
+								pattern="^\(\d{2}\) \d{4,5}-\d{4}$" required placeholder="Ex: (11) 91234-5678">
+						</div>
+
+						<button type="submit" class="btn btn-success btn-block">Cadastrar</button>
+					</form>
+				</div>
+			</div>

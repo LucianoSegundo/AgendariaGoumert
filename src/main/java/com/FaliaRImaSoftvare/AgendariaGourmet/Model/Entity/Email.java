@@ -1,5 +1,7 @@
 package com.FaliaRImaSoftvare.AgendariaGourmet.Model.Entity;
 
+import com.FaliaRImaSoftvare.AgendariaGourmet.Model.Exception.CamposInvalidosException;
+
 public class Email {
     private long id;
     private String email;
@@ -25,7 +27,8 @@ public class Email {
     }
 
     public boolean setEmail(String email) {
-    	if(validarEmail(email) == false) return false;
+    	if(email == null || email.isBlank()) throw new CamposInvalidosException("email não pode ser inserido por estar branco ou nulo");
+    	if(validarEmail(email) == false) throw new CamposInvalidosException("email não segue a formatação correta");
     	this.email = email;
     	
     	return true;
@@ -41,7 +44,7 @@ public class Email {
 
 	public boolean validarEmail(String email) {
     	
-        return false;
+        return true;
     }
 }
 
