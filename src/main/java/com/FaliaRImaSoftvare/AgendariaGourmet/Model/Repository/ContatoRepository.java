@@ -14,6 +14,7 @@ public class ContatoRepository implements Repositorio<Contato, Long> {
 
 	private EmailRepository emailRepo = new EmailRepository();
 	private TelefoneRepository telefoneRepo = new TelefoneRepository();
+
 	@Override
 	public void inserir(Contato contato) throws SQLException {
 		String query = "insert into Contato (nomeContato, idusuario)" + "values(?,?)" + ";";
@@ -24,12 +25,12 @@ public class ContatoRepository implements Repositorio<Contato, Long> {
 		pstm.setLong(2, contato.getUsuarioId());
 
 		pstm.execute();
-		
+
 	}
 
 	@Override
 	public void alterar(Contato contato) throws SQLException {
-		
+
 		String query = "update Contato set nomeContato=? where idcontato =" + contato.getId() + ";";
 
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(query);
@@ -38,7 +39,6 @@ public class ContatoRepository implements Repositorio<Contato, Long> {
 
 		pstm.execute();
 
-		
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class ContatoRepository implements Repositorio<Contato, Long> {
 		}
 		return contato;
 	}
-	
+
 	public Contato ler(String nomeContato) throws SQLException {
 		String query = "select * from Contato where nomecontato = '" + nomeContato + "';";
 
@@ -85,35 +85,48 @@ public class ContatoRepository implements Repositorio<Contato, Long> {
 
 			listaContato.add(contato);
 		}
-		
+
 		return listaContato;
 	}
-	
+
 	@Override
 	public void delete(Long idcontato) throws SQLException {
-		
+
 		String sql = "delete from Contato where idcontato = " + idcontato + ";";
 
+		List<NumeroTelefone> telefones = telefoneRepo.listar(idcontato);
+
+		for (NumeroTelefone telefone : telefones) {
+			telefoneRepo.delete(telefone.getId());
+
+		}
+		;
+
+		List<Email> emails = emailRepo.listar(idcontato);
+
+		for (Email email : emails) {
+			emailRepo.delete(email.getId());
+
+		}
+		;
+
 		ConnectionManager.getCurrentConnection().prepareStatement(sql).execute();
-		
+
 	}
 
 	private Contato montarContato(ResultSet resultado) throws SQLException {
 
 		Contato contato = new Contato();
-		
+
 		contato.setId(resultado.getLong("idcontato"));
 		contato.setNomeContato(resultado.getString("nomeContato"));
-		contato.setUsuarioId(resultado.getLong("idcontato"));
-		
+		contato.setUsuarioId(resultado.getLong("idusuario"));
+
 		List<NumeroTelefone> telefones = telefoneRepo.listar(contato.getId());
 		contato.setTelefones(telefones);
-		
+
 		List<Email> emails = emailRepo.listar(contato.getId());
 		contato.setEmails(emails);
-
-
-		System.out.println("Contato " + contato.getNomeContato() + "foi montado");
 
 		return contato;
 	}

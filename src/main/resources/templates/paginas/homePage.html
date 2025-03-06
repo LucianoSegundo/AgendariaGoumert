@@ -47,7 +47,7 @@
 
 		<tr th:each="contato : ${contatos}">
 			<td>
-				<a th:text="${contato.nomeContato}" th:href="@{/{usuario}/contato/consultar/{id}(usuario=${usuario}, id=${contato.id})}"></a>
+				<a th:text="${contato.nomeContato}" th:href="@{/{usuario}/contato/consultar/{contato}(usuario=${usuario}, contato=${contato.id})}"></a>
 			</td>
 			<td><a href="#" class="btn btn-warning" th:href="@{/{usuario}/contato/deletar/{id}(usuario=${usuario}, id=${contato.id})}">deletar</a>
 			<td><a href="#" class="btn btn-success" th:href="@{/{usuario}/{id}/email/criar(usuario=${usuario}, id=${contato.id})}">ADD Email</a>

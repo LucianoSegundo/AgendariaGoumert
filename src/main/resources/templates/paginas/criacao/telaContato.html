@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Agendaria Gourmet</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div th:replace="~{paginas/fragmentos/menu :: menu}"></div>
+
+	<div style="padding: 0px 20px;">
+		<table class="table table-striped">
+			<tr>
+				<h2 class="text-center mb-3" th:text="${nomeContato}" ></h2>
+
+			</tr>
+
+			<tr style="padding: 0px 10px; display: flex; justify-content: space-between;">
+				<a href="#" class="btn btn-success"
+					th:href="@{/{usuario}/{contato}/email/criar(usuario=${usuario}, contato=${contato})}"
+					style="width: 49%; padding: 10px 8px; margin-right: 26px;">Adicionar Novo Email</a></td>
+				<a href="#" class="btn btn-success"
+					th:href="@{/{usuario}/{contato}/telefone/criar(usuario=${usuario}, contato=${contato})}"
+					style="width: 49%; padding: 10px 8px;">Adicionar Novo Telefone</a></td>
+			</tr>
+		</table>
+	</div>
+
+
+	<div style="padding: 10px 10px; display: flex; justify-content: space-between">
+
+		<div id="email" style="padding: 10px 10px; width: 49%;">
+			<table class="table table-striped">
+
+				<tr class="table-primary">
+					<th style="width: 90%;">Email</th>
+					<th style="width: 10%;">deletar</th>
+				</tr>
+
+				<tr th:each="email : ${lEmail}">
+					<td>
+						<a th:text="${email.email}"></a>
+
+					<td><a href="#" class="btn btn-warning"
+							th:href="@{/{usuario}/{contato}/email/deletar/{id}(usuario=${usuario}, contato=${contato}, id=${email.id})}">deletar</a>
+					</td>
+
+				</tr>
+
+			</table>
+		</div>
+
+		<div id="numero" style="padding: 10px 10px;  width: 49%;">
+			<table class="table table-striped">
+
+				<tr class="table-primary">
+					<th style="width: 20%;">DDD</th>
+					<th style="width: 80%;">Telefone</th>
+					<th style="width: 10%;">deletar</thstyle="width: 70%;">
+
+				</tr>
+
+				<tr th:each="telefone : ${lTelefoen}">
+					<td>
+						<a th:text="${telefone.numeroDDD}"></a>
+					</td>
+					<td>
+						<a th:text="${telefone.numeroTelefone}"></a>
+					</td>
+					<td><a href="#" class="btn btn-warning"
+							th:href="@{/{usuario}/{contato}/telefone/deletar/{id}(usuario=${usuario}, contato=${contato}, id=${telefone.id})}">deletar</a>
+					</td>
+
+				</tr>
+
+			</table>
+		</div>
+
+	</div>
+
+
+
+</body>
+
+</html>

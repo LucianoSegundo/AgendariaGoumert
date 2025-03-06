@@ -22,7 +22,7 @@ public class ContatoService {
 	
 	public ContatoService() {}
 	
-	public void criar(ContatoDTO con, Long userid) {
+	public Long criar(ContatoDTO con, Long userid) {
 		Contato contato = new Contato();
 		
 		if(con.DDD() == null || con.DDD().isBlank()) throw new CamposInvalidosException("DDD branco ou nulo");
@@ -43,6 +43,8 @@ public class ContatoService {
 		TelefoneDTO telefone = new TelefoneDTO(con.DDD(), con.telefone());
 		
 		telefoneServi.criar(contato.getId(),telefone );
+		
+		return contato.getId();
 	
 	}
 	
@@ -55,13 +57,24 @@ public class ContatoService {
 	
 	public void alterar(long id, String novoNome) {
 		
-		if(id == 0)  throw new CamposInvalidosException();
-		if(novoNome == null || novoNome.isBlank())  throw new CamposInvalidosException();
+		if(id == 0)  throw new CamposInvalidosException("id invalido");
+		if(novoNome == null || novoNome.isBlank())  throw new CamposInvalidosException("novo nome branco ou nulo");
 		
 		Contato contato =  fachada.lerContato(id);
 		contato.setNomeContato(novoNome);
 		
 		fachada.alterar(contato); 
+	}
+
+	public Contato consultar(Long userId, Long id) throws Exception {
+		if(id == null)  throw new CamposInvalidosException("id invalido");
+
+
+		Contato contato = fachada.lerContato(id);
+		
+		if(contato.getUsuarioId() != userId) throw new AcessoIlegalException("O contato não pertence ao usuário");
+		
+		return contato;
 	}
 
 }

@@ -90,8 +90,6 @@ public class TelefoneRepository implements Repositorio<NumeroTelefone, Long> {
 		telefone.setNumeroTelefone(resultado.getString("numeroTelefone"));
 		telefone.setContato(resultado.getLong("idcontato"));
 		
-		System.out.println("Telefone " + telefone.getNumeroTelefone() + "foi montado");
-
 		return telefone;
 	}
 

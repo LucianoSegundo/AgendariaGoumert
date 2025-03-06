@@ -81,6 +81,13 @@ public final class UsuarioRepository implements Repositorio<Usuario, Long> {
 		
 		String sql = "delete from usuario where idusuario = "+ k+";";
 		
+		List<Contato> contatos = contatoRepo.listar(k);
+		
+		for (Contato contato : contatos) {
+			contatoRepo.delete(contato.getId());
+			
+		}		
+		
 		ConnectionManager.getCurrentConnection().prepareStatement(sql).execute();
 		
 	}

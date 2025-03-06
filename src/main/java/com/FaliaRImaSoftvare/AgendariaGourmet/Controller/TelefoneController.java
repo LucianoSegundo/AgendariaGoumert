@@ -28,8 +28,9 @@ public class TelefoneController {
 
 		m.addAttribute("usuario", idUsuario);
 		m.addAttribute("contato", idContato);
-		m.addAttribute("url", "/usuario/homepage/"+idUsuario);
+		m.addAttribute("url", "/" + idUsuario + "/contato/consultar/" + idContato);
 		m.addAttribute("msg", msg);
+		
 
 		return "paginas/criacao/TelaCadastroNumero";
 	}
@@ -45,6 +46,21 @@ public class TelefoneController {
 		} catch (Exception e) {
 			msg = e.getMessage();
 			return "redirect:/" + idUsuario + "/" + idContato + "/telefone/criar";
+
+		}
+	}
+	
+	@GetMapping("/deletar/{id}")
+	public String deletar(@PathVariable Long idUsuario, @PathVariable Long idContato, @PathVariable Long id, Model m, TelefoneDTO telefone) {
+
+		try {
+			service.excluir(id);
+
+			return "redirect:/" + idUsuario + "/contato/consultar/" + idContato;
+
+		} catch (Exception e) {
+			msg = e.getMessage();
+			return "redirect:/" + idUsuario + "/contato/consultar/" + idContato;
 
 		}
 	}

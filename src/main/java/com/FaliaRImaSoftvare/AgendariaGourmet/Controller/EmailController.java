@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.FaliaRImaSoftvare.AgendariaGourmet.Controller.Dto.TelefoneDTO;
 import com.FaliaRImaSoftvare.AgendariaGourmet.Model.Service.EmailService;
 
 @Controller
@@ -27,7 +28,7 @@ public class EmailController {
 
 		m.addAttribute("usuario", idUsuario);
 		m.addAttribute("contato", idContato);
-		m.addAttribute("url", "/usuario/homepage/"+idUsuario);
+		m.addAttribute("url", "/" + idUsuario + "/contato/consultar/" + idContato);
 		m.addAttribute("msg", msg);
 
 		return "paginas/criacao/TelaCadastroEmail";
@@ -44,6 +45,21 @@ public class EmailController {
 		} catch (Exception e) {
 			msg = e.getMessage();
 			return "redirect:/" + idUsuario + "/" + idContato + "/email/criar";
+
+		}
+	}
+	
+	@GetMapping("/deletar/{id}")
+	public String deletar(@PathVariable Long idUsuario, @PathVariable Long idContato, @PathVariable Long id, Model m, TelefoneDTO telefone) {
+
+		try {
+			service.excluir(id);
+
+			return "redirect:/" + idUsuario + "/contato/consultar/" + idContato;
+
+		} catch (Exception e) {
+			msg = e.getMessage();
+			return "redirect:/" + idUsuario + "/contato/consultar/" + idContato;
 
 		}
 	}

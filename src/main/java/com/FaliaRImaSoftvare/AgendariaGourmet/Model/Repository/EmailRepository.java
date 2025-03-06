@@ -87,7 +87,6 @@ public class EmailRepository implements Repositorio<Email, Long> {
 		email.setEmail(resultado.getString("email"));
 		email.setContato(resultado.getLong("idcontato"));
 		
-		System.out.println("Email " + email.getEmail() + "foi montado");
 
 		return email;
 	}
