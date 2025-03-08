@@ -48,12 +48,12 @@ public class ContatoService {
 
 		fachada.inserir(contato);
 
-		contato = fachada.lerContato(con.nomeContato());
+		contato = fachada.lerContato(con.nomeContato(), userid);
 
 		emailService.criar(contato.getId(), con.Email());
 
 		TelefoneDTO telefone = new TelefoneDTO(con.DDD(), con.telefone());
-
+		
 		telefoneServi.criar(contato.getId(), telefone);
 
 		return contato.getId();

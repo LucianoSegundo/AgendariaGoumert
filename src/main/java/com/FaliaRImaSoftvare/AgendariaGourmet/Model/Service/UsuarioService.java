@@ -21,12 +21,16 @@ public class UsuarioService {
 
 	public Usuario cadastrarUsuario(usuarioDTO request) {
 
-		if (request.senha() == null || request.senha().isBlank() || request.usuario() == null
-				|| request.usuario().isBlank())
-			throw new CamposInvalidosException();
-
-		if (request.email() == null || request.email().isBlank() || request.nome() == null || request.nome().isBlank())
-			throw new CamposInvalidosException();
+		if ( request.usuario() == null || request.usuario().isBlank())
+			throw new CamposInvalidosException("Usuario blanco ou nulo");
+		if (request.senha() == null || request.senha().isBlank())
+			throw new CamposInvalidosException("Senha blanca ou nula");
+		
+		if ( request.nome() == null || request.nome().isBlank())
+			throw new CamposInvalidosException("Nome blanco ou nulo");
+		
+		if (request.email() == null || request.email().isBlank() )
+			throw new CamposInvalidosException("Email blanco ou nulo");
 
 		Usuario teste = fachada.lerUsuario(request.usuario());
 
@@ -37,6 +41,7 @@ public class UsuarioService {
 		String senha = Integer.toString(request.senha().hashCode());
 
 		user.setSenha(senha);
+		user.setEmail(request.email());
 
 		fachada.inserir(user);
 

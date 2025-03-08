@@ -25,7 +25,7 @@ public class ContatoController {
 
 	@Autowired
 	private ContatoService service;
-
+	private ContatoDTO dadosCadastrais = null;
 	public ContatoController() {
 	}
 
@@ -40,6 +40,8 @@ public class ContatoController {
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", "/usuario/homepage");
 		msg = null;
+		
+		if(dadosCadastrais != null) m.addAttribute("dadosCadastrais", dadosCadastrais);
 
 		return "paginas/criacao/telaCriarContatos";
 	}
@@ -52,12 +54,16 @@ public class ContatoController {
 		try {
 
 			Long idContato = service.criar(contato, userId);
-
+			
+			m.addAttribute("dadosCadastrais", null);
+			
 			return "redirect:/contato/consultar/" + idContato;
 
 		} catch (CamposInvalidosException e) {
 
 			msg = e.getMessage();
+			
+			dadosCadastrais = contato;
 
 			return "redirect:/contato/criar";
 

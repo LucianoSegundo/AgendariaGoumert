@@ -3,6 +3,8 @@ package com.FaliaRImaSoftvare.AgendariaGourmet.Model.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.FaliaRImaSoftvare.AgendariaGourmet.Model.Exception.CamposInvalidosException;
+
 public class Usuario {
 	private long id;
 	private String usuario;
@@ -77,8 +79,18 @@ public class Usuario {
 	}
 
 	public void setEmail(String email) {
+		if (email == null || email.isBlank())
+			throw new CamposInvalidosException("email não pode ser inserido por estar branco ou nulo");
+		if (validarEmail(email) == false)
+			throw new CamposInvalidosException("email não segue a formatação correta como no exemplo: Email@gmail.com");
 		this.email = email;
+
 	}
+	
+	public boolean validarEmail(String email) {
+		if( email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) return true;
+			return false;
+		}
 
 	public List<Contato> getContatos() {
 		return contatos;

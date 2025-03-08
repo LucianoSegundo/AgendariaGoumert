@@ -32,7 +32,7 @@ public class Email {
 		if (email == null || email.isBlank())
 			throw new CamposInvalidosException("email não pode ser inserido por estar branco ou nulo");
 		if (validarEmail(email) == false)
-			throw new CamposInvalidosException("email não segue a formatação correta");
+			throw new CamposInvalidosException("email não segue a formatação correta como no exemplo: Email@gmail.com");
 		this.email = email;
 
 		return true;
@@ -47,7 +47,7 @@ public class Email {
 	}
 
 	public boolean validarEmail(String email) {
-
-		return true;
+	if( email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) return true;
+		return false;
 	}
 }

@@ -27,6 +27,8 @@ import jakarta.servlet.http.HttpSession;
 public class loginController {
 	private String msg = null;
 	private Usuario user = null;
+	
+	private usuarioDTO dadosCadastrais = null;
 
 	@Autowired
 	private UsuarioService service;
@@ -43,6 +45,12 @@ public class loginController {
 		m.addAttribute("msg", null);
 		m.addAttribute("msg", msg);
 		msg = null;
+		
+		if(dadosCadastrais != null) {
+			m.addAttribute("dadosCadastrais", dadosCadastrais);
+			dadosCadastrais = null;
+		}
+		
 
 		return "paginas/criacao/telaCadastroUsuario";
 	}
@@ -89,15 +97,18 @@ public class loginController {
 		try {
 			Usuario iduser = service.cadastrarUsuario(usuario);
 
-			session.setAttribute("usuario", iduser.getNome());
-			session.setAttribute("usuarioNome", user.getNome());
+			session.setAttribute("usuario", iduser.getId());
+			session.setAttribute("usuarioNome", iduser.getNome());
 
 			return "redirect:/usuario/homepage";
 
 		} catch (RecursoJaExisteException e) {
 			msg = "Usuario já cadastrado";
 		} catch (CamposInvalidosException e) {
-			msg = "cadastro negado devido a campos invaliddos";
+			msg = e.getMessage();
+			
+			dadosCadastrais = usuario;
+			
 		}
 
 		return "redirect:/usuario/cadastro";

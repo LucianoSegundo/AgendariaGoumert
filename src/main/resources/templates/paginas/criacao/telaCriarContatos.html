@@ -23,12 +23,13 @@
 						<div class="form-group">
 							<label for="nomeContato">Nome:</label>
 							<input type="text" class="form-control" id="nomeContato" name="nomeContato" required
-								placeholder="nome do contato">
+								placeholder="nome do contato" th:value="${dadosCadastrais?.nomeContato}">
 						</div>
 						<div class="form-group">
 							<label for="Email">Email:</label>
-							<input type="text" class="form-control" id="Email" name="Email" required
-								placeholder=" email@gmail.com">
+							<input type="email" class="form-control" id="Email" name="Email" required
+								placeholder="email@gmail.com" th:value="${dadosCadastrais?.Email}"
+								pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
 						</div>
 						<fieldset>
 							<legend>Telefone</legend>
@@ -36,12 +37,14 @@
 							<div class="form-group">
 								<label for="DDD">Numero de DDD:</label>
 								<input type="text" class="form-control" id="DDD" name="DDD" required
-									placeholder="numero do DDD">
+									placeholder="numero do DDD: exemplo 81" th:value="${dadosCadastrais?.DDD}"
+									pattern="^\[1-9]{2}\$">
 							</div>
 							<div class="form-group">
 								<label for="telefone">Numero de Telefone:</label>
 								<input type="text" class="form-control" id="telefone" name="telefone" required
-									placeholder="98765-4321">
+									placeholder="98765-4321" th:value="${dadosCadastrais?.telefone}"
+									pattern="^9\d{4}-\d{4}$">
 							</div>
 						</fieldset>
 

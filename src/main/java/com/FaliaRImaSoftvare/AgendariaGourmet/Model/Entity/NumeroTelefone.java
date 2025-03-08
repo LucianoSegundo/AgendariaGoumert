@@ -40,7 +40,7 @@ public class NumeroTelefone {
 		if (numeroDDD == null || numeroDDD.isBlank())
 			throw new CamposInvalidosException("não foi possivel inserir o numero do DDD, campo invalido");
 		if (validarNumeroDDD(numeroDDD) == false)
-			throw new CamposInvalidosException("DDD não segue o formanto: NN");
+			throw new CamposInvalidosException("DDD não segue o formato correto, como no exemplo: 81");
 		this.numeroDDD = numeroDDD;
 
 		return true;
@@ -54,7 +54,7 @@ public class NumeroTelefone {
 		if (numeroDDD == null || numeroDDD.isBlank())
 			throw new CamposInvalidosException("não foi possivel inserir o numero do Telefone, campo invalido");
 		if (validarNumeroTelefone(numeroTelefone) == false)
-			throw new CamposInvalidosException("Telefone não segue o formato 9NNNN-NNNN");
+			throw new CamposInvalidosException("Telefone não segue o formato correto, como no exemplo: 98888-8888");
 		this.numeroTelefone = numeroTelefone;
 
 		return true;
@@ -69,11 +69,15 @@ public class NumeroTelefone {
 	}
 
 	public boolean validarNumeroTelefone(String numeroTelefone) {
-
-		return true;
+	if(numeroTelefone.matches("^9\\d{4}-\\d{4}$")) return true;
+		
+		return false;
 	}
 
 	public boolean validarNumeroDDD(String numeroDDD) {
-		return true;
+		
+		if(numeroDDD.matches("^[1-9]{2}$")) return true;
+		
+		return false;
 	}
 }

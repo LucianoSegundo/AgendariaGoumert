@@ -17,35 +17,37 @@
 		<div class="row justify-content-center">
 			<div class="col-md-6">
 				<div class="card p-4 shadow-sm">
-					<h2 class="text-center mb-4">Cadastrar-se na Agendaria Gourmet</h2>
+					<h2 class="text-center mb-2">Cadastrar-se na Agendaria Gourmet</h2>
 					<form action="/usuario/cadastro" method="POST" id="formCadastro">
 
 						<div class="form-group">
 							<label for="Usuario">Usuario:</label>
 							<input type="text" class="form-control" id="usuario" name="usuario" required
-								placeholder="joão">
+								placeholder="joão" th:value="${dadosCadastrais?.usuario}">
 						</div>
 
 						<div class="form-group">
 							<label for="nome">Nome:</label>
 							<input type="text" class="form-control" id="nome" name="nome" required
-								placeholder="João Mathias">
+								placeholder="João Mathias"  th:value="${dadosCadastrais?.nome}">
 						</div>
 
 						<div class="form-group">
 							<label for="email">Email:</label>
-							<input type="text" class="form-control" id="email" name="email" required
-								placeholder="joao@gmail.com">
+							<input type="email" class="form-control" id="email" name="email" required
+								placeholder="joao@gmail.com" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+								 th:value="${dadosCadastrais?.email}">
 						</div>
 
 						<div class="form-group">
 							<label for="senha">Senha:</label>
-							<input type="password" class="form-control" id="senha" name="senha" required>
+							<input type="password" class="form-control" id="senha" name="senha" required  th:value="${dadosCadastrais?.senha}">
 						</div>
 
 						<button type="submit" class="btn btn-success btn-block">Criar</button>
 
-						<p> <a href="/usuario/login">Clique Aqui meu!</a> para fazer login meu!,caso já tenha conta meu!. </p>
+						<p> <a href="/usuario/login">Clique Aqui meu!</a> para fazer login meu!,caso já tenha conta
+							meu!. </p>
 					</form>
 				</div>
 			</div>

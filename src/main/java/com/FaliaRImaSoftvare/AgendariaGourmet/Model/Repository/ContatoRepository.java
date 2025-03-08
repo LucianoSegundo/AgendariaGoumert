@@ -56,11 +56,12 @@ public class ContatoRepository implements Repositorio<Contato, Long> {
 		return contato;
 	}
 
-	public Contato ler(String nomeContato) throws SQLException {
-		String query = "select * from Contato where nomecontato = ?;";
+	public Contato ler(String nomeContato, Long userid) throws SQLException {
+	    String query = "SELECT * FROM Contato WHERE nomecontato = ? AND idusuario = ?;";
 
 		PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(query);
 		pstm.setString(1, nomeContato);
+		pstm.setLong(2, userid);
 
 		ResultSet resultado = pstm.executeQuery();
 
@@ -165,6 +166,12 @@ public class ContatoRepository implements Repositorio<Contato, Long> {
 		}
 
 		return listaContato;
+	}
+
+	@Override
+	public Contato ler(String k) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -257,9 +257,9 @@ public class Fachada {
 
 	// contato
 
-	public Contato lerContato(String nome) {
+	public Contato lerContato(String nome, Long userid) {
 		try {
-			return contaRepo.ler(nome);
+			return contaRepo.ler(nome, userid);
 		} catch (SQLException e) {
 			e.printStackTrace();
 
